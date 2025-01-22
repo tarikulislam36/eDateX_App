@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, StatusBar } from "react-native";
+import { View, StyleSheet, Text, StatusBar, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Animated, {
     useSharedValue,
@@ -36,21 +36,29 @@ export default function index() {
     });
 
     return (
-        <View style={styles.container}>
+        // <View style={styles.container}>
+        //     <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+        //     <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+        //         <LinearGradient
+        //             colors={["#FFFFFF", "#ADD8FF"]} // Left-to-right gradient (white to blue)
+        //             style={styles.gradient}
+        //             start={{ x: 0, y: 0 }}
+        //             end={{ x: 1, y: 0 }} // Horizontal gradient
+        //         />
+
+
+        //     </Animated.View>
+
+        <View style={tw`flex-1 w-full justify-center items-center absolute top-22`}>
             <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-            <Animated.View style={[styles.animatedContainer, animatedStyle]}>
-                <LinearGradient
-                    colors={["#FFFFFF", "#ADD8FF"]} // Left-to-right gradient (white to blue)
-                    style={styles.gradient}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }} // Horizontal gradient
-                />
-
-
-            </Animated.View>
-
+            <Image
+                source={require('./img/cy-removebg-preview.png')}
+                style={tw`w-90 h-85 mb-5`} // Adjust size for logo
+            />
 
         </View>
+
+        // </View>
     );
 }
 
