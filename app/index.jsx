@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, StatusBar, Image } from "react-native";
+import { View, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Animated, {
     useSharedValue,
@@ -9,6 +9,8 @@ import Animated, {
     interpolate,
 } from "react-native-reanimated";
 import tw from 'twrnc';
+import { router, link } from 'expo-router';
+import App from './(Auth)/App';
 
 export default function index() {
     const animationValue = useSharedValue(0);
@@ -55,6 +57,15 @@ export default function index() {
                 source={require('./img/cy-removebg-preview.png')}
                 style={tw`w-90 h-85 mb-5`} // Adjust size for logo
             />
+
+            <TouchableOpacity onPress={() => router.push('App')}>
+                <LinearGradient
+                    colors={['#d8eb2d', '#1adae8']}
+                    style={tw`rounded-full px-32 py-4 relative top-45 bottom--14`} // Adjust padding for button
+                >
+                    <Text style={tw`text-white font-bold text-lg`}>Start now</Text>
+                </LinearGradient>
+            </TouchableOpacity>
 
         </View>
 
