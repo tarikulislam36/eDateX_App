@@ -38,38 +38,55 @@ export default function index() {
     });
 
     return (
-        // <View style={styles.container}>
-        //     <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-        //     <Animated.View style={[styles.animatedContainer, animatedStyle]}>
-        //         <LinearGradient
-        //             colors={["#FFFFFF", "#ADD8FF"]} // Left-to-right gradient (white to blue)
-        //             style={styles.gradient}
-        //             start={{ x: 0, y: 0 }}
-        //             end={{ x: 1, y: 0 }} // Horizontal gradient
-        //         />
+
+        <>
+            <View style={styles.container}>
+                <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+                <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+                    <LinearGradient
+                        colors={["#FFFFFF", "#ADD8FF"]} // Left-to-right gradient (white to blue)
+                        style={styles.gradient}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }} // Horizontal gradient
+                    />
 
 
-        //     </Animated.View>
+                </Animated.View>
 
-        <View style={tw`flex-1 w-full justify-center items-center absolute top-22`}>
-            <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-            <Image
-                source={require('./img/cy-removebg-preview.png')}
-                style={tw`w-90 h-85 mb-5`} // Adjust size for logo
-            />
+                <View style={tw`flex-1 w-full justify-center items-center absolute top-22`}>
+                    <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+                    <Image
+                        source={require('./img/cy-removebg-preview.png')}
+                        style={tw`w-90 h-85 mb-5`} // Adjust size for logo
+                    />
 
-            <TouchableOpacity onPress={() => router.push('App')}>
-                <LinearGradient
-                    colors={['#d8eb2d', '#1adae8']}
-                    style={tw`rounded-full px-32 py-4 relative top-45 bottom--14`} // Adjust padding for button
-                >
-                    <Text style={tw`text-white font-bold text-lg`}>Start now</Text>
-                </LinearGradient>
-            </TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push('App')}>
+                        <LinearGradient
+                            colors={['#aed3f5', '#1adae8']}
+                            style={tw`rounded-full px-25 py-4 relative top-35 bottom--14 mb-2`} // Adjust padding for button
+                        >
+                            <Text style={tw`text-white font-bold text-lg`}>Create Account</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
 
-        </View>
+                    <TouchableOpacity onPress={() => router.push('App')}>
+                        <LinearGradient
+                            colors={['#ebe2e1', '#ADD8FF']}
+                            style={tw`rounded-full px-35 py-4 relative top-35 bottom--14`} // Adjust padding for button
+                        >
+                            <Text style={tw`text-white font-bold text-lg`}>Login</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    {/* Foter  Policy alert*/}
+                    <View style={tw`items-center justify-center mt-5 relative top-35 bottom--14`}>
+                        <Text style={tw`text-center p-3 font-bold text-slate-500`}> By signing up, you agree to our Terms of Service and Privacy Policy</Text>
+                    </View>
 
-        // </View>
+
+                </View>
+
+            </View >
+        </>
     );
 }
 
