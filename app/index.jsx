@@ -9,7 +9,7 @@ import Animated, {
     interpolate,
 } from "react-native-reanimated";
 import tw from 'twrnc';
-import { router, link } from 'expo-router';
+import { router, Link } from 'expo-router';
 import App from './(Auth)/App';
 
 export default function index() {
@@ -68,7 +68,7 @@ export default function index() {
                             <Text style={tw`text-white font-bold text-lg`}>Create Account</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-
+                    <Link href='/App'> Go to Profile</Link>
                     <TouchableOpacity onPress={() => router.push('App')}>
                         <LinearGradient
                             colors={['#ebe2e1', '#ADD8FF']}

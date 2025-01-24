@@ -4,16 +4,21 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LinearGradient from "react-native-linear-gradient";
 import Svg, { Path } from 'react-native-svg';
+import { router, Link } from 'expo-router';
+import BackButton from './BackButton';
 const App = () => {
     return (
         <>
             <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-
+            <View style={twrnc`absolute top-5 z-5 left-0`} >
+                <BackButton style={twrnc`absolute top-5`} />
+            </View>
             <SafeAreaView style={twrnc` w-full h-full justify-center items-center `}>
+
 
                 <Image
                     source={require('../img/bird.png')}
-                    style={twrnc`w-60 h-30 mb-5`} // Adjust size for logo
+                    style={twrnc`w-60 h-30 mb-5`} //  logo
                 />
 
                 <Text style={twrnc`text-2xl font-bold text-red-900 mb-5`}>Create Account</Text>
@@ -24,7 +29,7 @@ const App = () => {
                     <TouchableOpacity onPress={() => router.push('App')}>
                         <LinearGradient
                             colors={['#b30790', '#1adae8']}
-                            style={twrnc`rounded-full px-32 py-4 `} // Adjust padding for button
+                            style={twrnc`rounded-full px-32 py-4 `} // Continue Button
                         >
                             <Text style={twrnc`text-white font-bold text-lg`}>Continue</Text>
                         </LinearGradient>
@@ -68,7 +73,7 @@ const App = () => {
                     </View>
                     <View style={twrnc`flex-row items-center justify-center`}>
                         <Text style={twrnc`text-slate-500`}>Already have an account?</Text>
-                        <TouchableOpacity onPress={() => router.push('App')}>
+                        <TouchableOpacity onPress={() => router.push('Login')}>
                             <Text style={twrnc`text-blue-500 ml-2`}>Login</Text>
                         </TouchableOpacity>
                     </View>
