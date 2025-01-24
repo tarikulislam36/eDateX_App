@@ -26,7 +26,7 @@ const App = () => {
 
                     <TextInput style={twrnc`w-full h-12 border-4 rounded-lg px-2 mb-5 border-slate-100 bg-slate-100`} placeholder="Enter your First Name" />
                     <TextInput style={twrnc`w-full h-12 border-4 rounded-lg px-2 mb-7 border-slate-100 bg-slate-100`} placeholder="Enter 10 Digits phone number" />
-                    <TouchableOpacity onPress={() => router.push('App')}>
+                    <TouchableOpacity onPress={() => router.push('UserAbout')}>
                         <LinearGradient
                             colors={['#b30790', '#1adae8']}
                             style={twrnc`rounded-full px-32 py-4 `} // Continue Button
