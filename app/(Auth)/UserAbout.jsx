@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, SafeAreaView, Image, StyleSheet, StatusBar } from 'react-native';
 import tw from 'twrnc';
 import LinearGradient from "react-native-linear-gradient";
+
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withRepeat,
+    withTiming,
+    interpolate,
+} from "react-native-reanimated";
 
 const UserAbout = () => {
     const [step, setStep] = useState(1); // Current step
@@ -56,6 +64,11 @@ const UserAbout = () => {
             case 1:
                 return (
                     <View>
+
+                        <Image
+                            source={require('../img/Gender.png')}
+                            style={tw`w-60 h-40 mb-5`} //  logo
+                        />
                         <Text style={tw`text-lg text-center mb-3`}>Select your gender</Text>
                         <TouchableOpacity
                             onPress={() => setFormData({ ...formData, gender: 'Male' })}
@@ -124,56 +137,114 @@ const UserAbout = () => {
         }
     };
 
+    // BG style
+    const animationValue = useSharedValue(0);
+
+    React.useEffect(() => {
+        // Start infinite horizontal wave animation
+        animationValue.value = withRepeat(
+            withTiming(1, { duration: 6000 }), // Animation duration
+            -1, // Repeat forever
+            true // Reverse direction
+        );
+    }, []);
+
+    const animatedStyle = useAnimatedStyle(() => {
+        // Horizontal wave-like movement
+        const translateX = interpolate(
+            animationValue.value,
+            [0, 1],
+            [-200, 200] // Move left and right
+        );
+
+        return {
+            transform: [{ translateX }],
+        };
+    });
+    // end BG style
     return (
-        <View style={tw`flex-1 p-5`}>
-            {/* Status Bar */}
-            <View style={tw`mb-5`}>
-                <View style={tw`flex-row items-center`}>
-                    {[...Array(totalSteps)].map((_, index) => (
-                        <LinearGradient
-                            key={index}
-                            colors={index < step ? ['#34D399', '#059669'] : ['#D1D5DB', '#D1D5DB']}
-                            style={tw`h-2 flex-1 mx-1 rounded-full`}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
-                        />
-                    ))}
+        <SafeAreaView style={tw`h-full w-full`}>
+            <View style={tw`flex-1 p-5`}>
+
+                <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+                <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+                    <LinearGradient //FFFFFF
+                        colors={["#1adae8", "#FFFFFF"]} // Left-to-right gradient (white to blue)
+                        style={styles.gradient}
+                        start={{ x: 0.1, y: 0.1 }} // Adjust gradient start position
+                        end={{ x: 0.5, y: 0.7 }} // Adjust gradient end position
+                    />
+
+
+                </Animated.View>
+                {/* Status Bar */}
+                <View style={tw`mb-5`}>
+                    <View style={tw`flex-row items-center`}>
+                        {[...Array(totalSteps)].map((_, index) => (
+                            <LinearGradient
+                                key={index}
+                                colors={index < step ? ['#34D399', '#059669'] : ['#D1D5DB', '#D1D5DB']}
+                                style={tw`h-2 flex-1 mx-1 rounded-full`}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                            />
+                        ))}
+                    </View>
+                </View>
+
+                {/* Step Content */}
+                <View style={tw`flex-1 justify-center`}>
+                    {renderStepContent()}
+                </View>
+
+                {/* Buttons */}
+                <View style={tw`flex-row justify-between mt-5`}>
+                    {step > 1 && (
+                        <TouchableOpacity
+                            onPress={handleBack}
+                            style={tw`bg-gray-500 p-3 rounded-md`}
+                        >
+                            <Text style={tw`text-white text-lg`}>Back</Text>
+                        </TouchableOpacity>
+                    )}
+                    {step < totalSteps ? (
+                        <TouchableOpacity
+                            onPress={handleNext}
+                            style={tw`bg-blue-500 p-3 rounded-md`}
+                        >
+                            <Text style={tw`text-white text-lg`}>Next</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity
+                            onPress={handleFinish}
+                            style={tw`bg-green-500 p-3 rounded-md`}
+                        >
+                            <Text style={tw`text-white text-lg`}>Finish</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
-
-            {/* Step Content */}
-            <View style={tw`flex-1 justify-center`}>
-                {renderStepContent()}
-            </View>
-
-            {/* Buttons */}
-            <View style={tw`flex-row justify-between mt-5`}>
-                {step > 1 && (
-                    <TouchableOpacity
-                        onPress={handleBack}
-                        style={tw`bg-gray-500 p-3 rounded-md`}
-                    >
-                        <Text style={tw`text-white text-lg`}>Back</Text>
-                    </TouchableOpacity>
-                )}
-                {step < totalSteps ? (
-                    <TouchableOpacity
-                        onPress={handleNext}
-                        style={tw`bg-blue-500 p-3 rounded-md`}
-                    >
-                        <Text style={tw`text-white text-lg`}>Next</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity
-                        onPress={handleFinish}
-                        style={tw`bg-green-500 p-3 rounded-md`}
-                    >
-                        <Text style={tw`text-white text-lg`}>Finish</Text>
-                    </TouchableOpacity>
-                )}
-            </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
 export default UserAbout;
+
+
+// Style
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#FFFFFF", // Fallback background
+    },
+    animatedContainer: {
+        ...StyleSheet.absoluteFillObject,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    gradient: {
+        width: 1200, // Wider to ensure smooth animation
+        height: 1000, // Enough height to cover screen
+        borderRadius: 600, // Curve for smooth gradient edges
+    },
+});

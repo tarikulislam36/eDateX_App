@@ -18,7 +18,7 @@ export default function index() {
     React.useEffect(() => {
         // Start infinite horizontal wave animation
         animationValue.value = withRepeat(
-            withTiming(1, { duration: 6000 }), // Animation duration
+            withTiming(1, { duration: 600006000 }), // Animation duration
             -1, // Repeat forever
             true // Reverse direction
         );
@@ -40,14 +40,14 @@ export default function index() {
     return (
 
         <>
-            <View style={styles.container}>
+            <View >
                 <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
                 <Animated.View style={[styles.animatedContainer, animatedStyle]}>
-                    <LinearGradient
-                        colors={["#FFFFFF", "#ADD8FF"]} // Left-to-right gradient (white to blue)
+                    <LinearGradient //FFFFFF
+                        colors={["#1adae8", "#FFFFFF"]} // Left-to-right gradient (white to blue)
                         style={styles.gradient}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 0 }} // Horizontal gradient
+                        start={{ x: 0.5, y: 0.1 }} // Adjust gradient start position
+                        end={{ x: 0.5, y: 0.9 }} // Adjust gradient end position
                     />
 
 
@@ -93,7 +93,7 @@ export default function index() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "black", // Fallback background
+        backgroundColor: "#FFFFFF", // Fallback background
     },
     animatedContainer: {
         ...StyleSheet.absoluteFillObject,
