@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, SafeAreaView, Image, StyleSheet, StatusBar } from 'react-native';
 import tw from 'twrnc';
 import LinearGradient from "react-native-linear-gradient";
+import Svg from 'react-native-svg';
 
-import Animated, {
-    useSharedValue,
-    useAnimatedStyle,
-    withRepeat,
-    withTiming,
-    interpolate,
-} from "react-native-reanimated";
+
 
 const UserAbout = () => {
     const [step, setStep] = useState(1); // Current step
@@ -64,24 +59,33 @@ const UserAbout = () => {
             case 1:
                 return (
                     <View>
-
                         <Image
                             source={require('../img/Gender.png')}
-                            style={tw`w-60 h-40 mb-5`} //  logo
+                            style={tw`w-60 h-40 mb-5`} // logo
                         />
                         <Text style={tw`text-lg text-center mb-3`}>Select your gender</Text>
-                        <TouchableOpacity
-                            onPress={() => setFormData({ ...formData, gender: 'Male' })}
-                            style={tw`bg-blue-500 p-3 rounded-md mb-2`}
-                        >
-                            <Text style={tw`text-white text-lg`}>Male</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => setFormData({ ...formData, gender: 'Female' })}
-                            style={tw`bg-pink-500 p-3 rounded-md`}
-                        >
-                            <Text style={tw`text-white text-lg`}>Female</Text>
-                        </TouchableOpacity>
+                        <View style={tw`flex-row justify-center`}>
+                            <TouchableOpacity
+                                onPress={() => setFormData({ ...formData, gender: 'Male' })}
+                                style={tw` flex-1 bg-blue-100 p-3 justify-center items-center rounded-md mx-0.8  h-45 w-1/2 `} // button
+                            >
+                                <Image
+                                    source={require('../img/male.png')}
+                                    style={tw`w-20 h-20 mb-2 relative left-1.5`}
+                                />
+                                <Text style={tw`text-green-900 text-xl relative right-1.5 `}>Male</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => setFormData({ ...formData, gender: 'Female' })}
+                                style={tw` flex-1 bg-blue-100 p-3 justify-center items-center rounded-lg mx-0.8  h-45 w-1/2 `} // button
+                            >
+                                <Image
+                                    source={require('../img/female.png')}
+                                    style={tw`w-20 h-20 mb-2 relative left-0`}
+                                />
+                                <Text style={tw`text-green-900 text-lg`}>Female</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 );
             case 2:
@@ -137,46 +141,11 @@ const UserAbout = () => {
         }
     };
 
-    // BG style
-    const animationValue = useSharedValue(0);
-
-    React.useEffect(() => {
-        // Start infinite horizontal wave animation
-        animationValue.value = withRepeat(
-            withTiming(1, { duration: 6000 }), // Animation duration
-            -1, // Repeat forever
-            true // Reverse direction
-        );
-    }, []);
-
-    const animatedStyle = useAnimatedStyle(() => {
-        // Horizontal wave-like movement
-        const translateX = interpolate(
-            animationValue.value,
-            [0, 1],
-            [-200, 200] // Move left and right
-        );
-
-        return {
-            transform: [{ translateX }],
-        };
-    });
-    // end BG style
     return (
         <SafeAreaView style={tw`h-full w-full`}>
             <View style={tw`flex-1 p-5`}>
 
-                <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-                <Animated.View style={[styles.animatedContainer, animatedStyle]}>
-                    <LinearGradient //FFFFFF
-                        colors={["#1adae8", "#FFFFFF"]} // Left-to-right gradient (white to blue)
-                        style={styles.gradient}
-                        start={{ x: 0.1, y: 0.1 }} // Adjust gradient start position
-                        end={{ x: 0.5, y: 0.7 }} // Adjust gradient end position
-                    />
 
-
-                </Animated.View>
                 {/* Status Bar */}
                 <View style={tw`mb-5`}>
                     <View style={tw`flex-row items-center`}>
