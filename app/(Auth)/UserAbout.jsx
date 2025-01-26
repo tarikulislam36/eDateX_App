@@ -19,6 +19,30 @@ const UserAbout = () => {
     }); // User data
     const totalSteps = 6; // Total number of steps
     const [education, setEducation] = useState(null); // Selected education qualification
+    const [selectedLookingFor, setSelectedLookingFor] = useState([]);
+    const [selectedHobbies, setSelectedHobbies] = useState([]);
+
+
+    const handleLookingFor = (option) => {
+        if (selectedLookingFor.includes(option)) {
+            setSelectedLookingFor(
+                selectedLookingFor.filter((item) => item !== option)
+            );
+        } else if (selectedLookingFor.length < 2) {
+            setSelectedLookingFor([...selectedLookingFor, option]);
+        }
+    };
+
+    const handleHobbies = (hobby) => {
+        if (selectedHobbies.includes(hobby)) {
+            setSelectedHobbies(
+                selectedHobbies.filter((item) => item !== hobby)
+            );
+        } else if (selectedHobbies.length < 5) {
+            setSelectedHobbies([...selectedHobbies, hobby]);
+        }
+    };
+
 
     const handleNext = () => {
         // Validation for each step
@@ -178,14 +202,196 @@ const UserAbout = () => {
                 );
             case 5:
                 return (
-                    <View>
-                        <Text style={tw`text-lg text-center mb-3`}>Upload your profile picture</Text>
-                        <TextInput
-                            style={tw`border border-gray-300 p-3 rounded-md`}
-                            placeholder="Profile Picture URL"
-                            value={formData.profilePicture}
-                            onChangeText={(text) => setFormData({ ...formData, profilePicture: text })}
-                        />
+                    <View style={tw`p-4`}>
+                        {/* "What are you looking for?" Section */}
+                        <Text style={tw`text-lg font-bold mb-4 text-gray-800`}>
+                            What are you looking for?
+                        </Text>
+                        <View style={tw`flex-row flex-wrap mb-4`}>
+                            {['Friendship', 'Hangout', 'Short Term Fun', 'Long Term Fun', 'Life Partner', "We'll See"].map((option, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => handleLookingFor(option)}
+                                    style={tw`m-1 p-2 rounded-md border ${selectedLookingFor.includes(option)
+                                        ? 'bg-blue-500 border-blue-700'
+                                        : 'border-gray-300'
+                                        }`}
+                                >
+                                    <Text
+                                        style={tw`${selectedLookingFor.includes(option)
+                                            ? 'text-white'
+                                            : 'text-gray-800'
+                                            }`}
+                                    >
+                                        {option}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+
+                        {/* Hobbies Section */}
+                        <Text style={tw`text-lg font-bold mb-4 text-gray-800`}>
+                            What are your hobbies?
+                        </Text>
+                        <View style={tw`flex-row flex-wrap`}>
+                            {['Reading',
+                                'Traveling',
+                                'Cooking',
+                                'Gaming',
+                                'Music',
+                                'Sports',
+                                'Photography',
+                                'Dancing',
+                                'Writing',
+                                'Drawing',
+                                'Cycling',
+                                'Gardening',
+                                'Fishing',
+                                'Knitting',
+                                'Sewing',
+                                'Woodworking',
+                                'Crafting',
+                                'Painting',
+                                'Video Editing',
+                                'Blogging',
+                                'Fitness',
+                                'Running',
+                                'Yoga',
+                                'Swimming',
+                                'Hiking',
+                                'Birdwatching',
+                                'Collecting',
+                                'Astrology',
+                                'Astronomy',
+                                'Puzzles',
+                                'Camping',
+                                'Rock Climbing',
+                                'Sculpting',
+                                'Pottery',
+                                'Baking',
+                                'Coding/Programming',
+                                'Tech Innovation',
+                                'Social Media',
+                                'Tech Support',
+                                '3D Printing',
+                                'Virtual Reality',
+                                'Board Games',
+                                'Public Speaking',
+                                'Stand-up Comedy',
+                                'Watching Movies',
+                                'Swimming',
+                                'Car Maintenance',
+                                'Genealogy',
+                                'DIY Projects',
+                                'Potluck Hosting',
+                                'Public Volunteering',
+                                'Animal Care',
+                                'Calligraphy',
+                                'Language Learning',
+                                'History Buff',
+                                'Debating',
+                                'Model Building',
+                                'Metalworking',
+                                'Woodworking',
+                                'Roleplaying Games (RPGs)',
+                                'Escape Rooms',
+                                'Magic Tricks',
+                                'Volunteering',
+                                'Charity Work',
+                                'Candle Making',
+                                'Jewelry Making',
+                                'Leather Crafting',
+                                'Bird Keeping',
+                                'Home Brewing',
+                                'LARPing',
+                                'Sailing',
+                                'Caving',
+                                'Surfing',
+                                'Wrestling',
+                                'Juggling',
+                                'Bowling',
+                                'Motorcycling',
+                                'Automobile Restoration',
+                                'Ice Skating',
+                                'Horseback Riding',
+                                'Archery',
+                                'Fencing',
+                                'Golf',
+                                'Tennis',
+                                'Baseball',
+                                'Basketball',
+                                'Football',
+                                'Table Tennis',
+                                'Martial Arts',
+                                'Cricket',
+                                'Billiards',
+                                'Darts',
+                                'Snowboarding',
+                                'Skiing',
+                                'Farming',
+                                'Foraging',
+                                'Ice Fishing',
+                                'Camping',
+                                'Wine Tasting',
+                                'Hunting',
+                                'Recycling',
+                                'Upcycling',
+                                'Meditation',
+                                'Tai Chi',
+                                'Djembe Drumming',
+                                'Salsa Dancing',
+                                'Line Dancing',
+                                'Flamenco Dancing',
+                                'Rock Climbing',
+                                'Bouldering',
+                                'Bungee Jumping',
+                                'Skydiving',
+                                'Zip Lining',
+                                'Scuba Diving',
+                                'Kayaking',
+                                'Canoeing',
+                                'Horse Riding',
+                                'Lacrosse',
+                                'Curling',
+                                'Canoeing',
+                                'Tabletop RPG',
+                                'Competitive Sports',
+                                'Geocaching',
+                                'Parkour',
+                                'Farming',
+                                'Wildlife Watching',
+                                'Frisbee',
+                                'Horseback Riding',
+                                'Rugby',
+                                'Skateboarding',
+                                'Free Running',
+                                'Welding',
+                                'Pottery Making',
+                                'Sushi Making',
+                                'Ferry Riding',
+                                'Puzzle Solving',
+                                'Magic The Gathering',
+                                'Baking Bread'
+                            ].map((hobby, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => handleHobbies(hobby)}
+                                    style={tw`m-1 p-2 rounded-md border ${selectedHobbies.includes(hobby)
+                                        ? 'bg-green-500 border-green-700'
+                                        : 'border-gray-300'
+                                        }`}
+                                >
+                                    <Text
+                                        style={tw`${selectedHobbies.includes(hobby)
+                                            ? 'text-white'
+                                            : 'text-gray-800'
+                                            }`}
+                                    >
+                                        {hobby}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
                 );
             default:
