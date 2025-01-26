@@ -1,10 +1,91 @@
-import React, { useState } from 'react';
+<Text style={tw`text-lg text-center mb-3`}>Enter your date of birth</Text>
+                        <View style={tw`flex-row justify-center`}>
+                            <TextInput
+                                style={tw`border border-gray-300 p-3 rounded-md w-1/3 mx-1`}
+                                placeholder="DD"
+                                maxLength={2}
+                                keyboardType="numeric"
+                                value={formData.dateOfBirth.split('/')[0]}
+                                onChangeText={(text) => setFormData({ ...formData, dateOfBirth: `${text}/${formData.dateOfBirth.split('/')[1]}/${formData.dateOfBirth.split('/')[2]}` })}
+                            />
+                            <TextInput
+                                style={tw`border border-gray-300 p-3 rounded-md w-1/3 mx-1`}
+                                placeholder="MM"
+                                maxLength={2}
+                                keyboardType="numeric"
+                                value={formData.dateOfBirth.split('/')[1]}
+                                onChangeText={(text) => setFormData({ ...formData, dateOfBirth: `${formData.dateOfBirth.split('/')[0]}/${text}/${formData.dateOfBirth.split('/')[2]}` })}
+                            />
+                            <TextInput
+                                style={tw`border border-gray-300 p-3 rounded-md w-1/3 mx-1`}
+                                placeholder="YYYY"
+                                maxLength={4}
+                                keyboardType="numeric"
+                                value={formData.dateOfBirth.split('/')[2]}
+                                onChangeText={(text) => setFormData({ ...formData, dateOfBirth: `${formData.dateOfBirth.split('/')[0]}/${formData.dateOfBirth.split('/')[1]}/${text}` })}
+                            />
+                        </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, SafeAreaView, Image, StyleSheet, StatusBar } from 'react-native';
 import tw from 'twrnc';
 import LinearGradient from "react-native-linear-gradient";
 import Svg from 'react-native-svg';
 import { Picker } from '@react-native-picker/picker';
-import SelectInstitute from './SelectInstitute';
 
 
 const UserAbout = () => {
@@ -17,7 +98,6 @@ const UserAbout = () => {
         profilePicture: '',
     }); // User data
     const totalSteps = 5; // Total number of steps
-    const [education, setEducation] = useState(null); // Selected education qualification
 
     const handleNext = () => {
         // Validation for each step
@@ -129,40 +209,25 @@ const UserAbout = () => {
             case 2:
                 return (
                     <View>
-                        {/* Education Qualification Section */}
-                        <Text style={tw`text-lg text-center mb-4`}>Select your education qualification</Text>
-                        {[
-                            'Bachelors',
-                            'Masters',
-                            'PhD',
-                            'High School',
-                            'Pursuing Bachelors',
-                            'Pursuing Masters',
-                            'Pursuing PhD',
-                        ].map((item) => (
-                            <TouchableOpacity
-                                key={item}
-                                style={tw`p-3 border rounded-md mb-2 ${education === item ? 'bg-blue-500' : 'bg-gray-200'}`}
-                                onPress={() => setEducation(item)}
-                            >
-                                <Text style={tw`${education === item ? 'text-white' : 'text-black'} text-center`}>{item}</Text>
-                            </TouchableOpacity>
-                        ))}
+                        <Text style={tw`text-lg text-center mb-3`}>Enter your date of birth</Text>
+                        <TextInput
+                            style={tw`border border-gray-300 p-3 rounded-md`}
+                            placeholder="YYYY-MM-DD"
+                            value={formData.dateOfBirth}
+                            onChangeText={(text) => setFormData({ ...formData, dateOfBirth: text })}
+                        />
                     </View>
                 );
             case 3:
                 return (
                     <View>
-                        {/* select Institue */}
-                        <SelectInstitute
-                            onInstituteSelect={(institute) => {
-                                alert(`Selected Institute: ${institute.name}, ${institute.country}`);
-                                handleNext(); // Proceed to the next step after selection
-                            }}
+                        <Text style={tw`text-lg text-center mb-3`}>Select your interests</Text>
+                        <TextInput
+                            style={tw`border border-gray-300 p-3 rounded-md`}
+                            placeholder="e.g., Music, Sports"
+                            value={formData.interests}
+                            onChangeText={(text) => setFormData({ ...formData, interests: text })}
                         />
-
-
-
                     </View>
                 );
             case 4:
