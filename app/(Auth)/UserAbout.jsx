@@ -5,6 +5,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Svg from 'react-native-svg';
 import { Picker } from '@react-native-picker/picker';
 import SelectInstitute from './SelectInstitute';
+import ProfessionSection from './ProfessionSection';
 
 
 const UserAbout = () => {
@@ -16,7 +17,7 @@ const UserAbout = () => {
         location: '',
         profilePicture: '',
     }); // User data
-    const totalSteps = 5; // Total number of steps
+    const totalSteps = 6; // Total number of steps
     const [education, setEducation] = useState(null); // Selected education qualification
 
     const handleNext = () => {
@@ -25,15 +26,15 @@ const UserAbout = () => {
             Alert.alert('Validation Error', 'Please select your gender.');
             return;
         }
-        if (step === 2 && !formData.dateOfBirth) {
+        if (step === 2 && formData.dateOfBirth) {
             Alert.alert('Validation Error', 'Please enter your date of birth.');
             return;
         }
-        if (step === 3 && !formData.interests) {
+        if (step === 3 && formData.interests) {
             Alert.alert('Validation Error', 'Please select your interests.');
             return;
         }
-        if (step === 4 && !formData.location) {
+        if (step === 4 && formData.location) {
             Alert.alert('Validation Error', 'Please enter your location.');
             return;
         }
@@ -41,6 +42,7 @@ const UserAbout = () => {
             Alert.alert('Validation Error', 'Please upload your profile picture.');
             return;
         }
+
         if (step < totalSteps) {
             setStep(step + 1);
         }
@@ -152,7 +154,7 @@ const UserAbout = () => {
                 );
             case 3:
                 return (
-                    <View>
+                    <View style={tw`flex-1 p-5`}>
                         {/* select Institue */}
                         <SelectInstitute
                             onInstituteSelect={(institute) => {
@@ -167,14 +169,11 @@ const UserAbout = () => {
                 );
             case 4:
                 return (
-                    <View>
-                        <Text style={tw`text-lg text-center mb-3`}>Enter your location</Text>
-                        <TextInput
-                            style={tw`border border-gray-300 p-3 rounded-md`}
-                            placeholder="City, Country"
-                            value={formData.location}
-                            onChangeText={(text) => setFormData({ ...formData, location: text })}
-                        />
+                    <View style={tw`flex-1 p-5`}>
+                        {/* Professon section */}
+                        <ProfessionSection />
+
+
                     </View>
                 );
             case 5:

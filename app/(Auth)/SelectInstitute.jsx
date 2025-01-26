@@ -43,7 +43,7 @@ const SelectInstitute = ({ onInstituteSelect }) => {
         <View style={tw`flex-1 p-5`}>
             <Text style={tw`text-lg mb-3`}>Select Your Institute</Text>
             <TextInput
-                style={tw`border p-3 rounded-md mb-5 h-35`}
+                style={tw`border p-3 rounded-md mb-5 `}
                 placeholder="Search for your institute..."
                 value={searchTerm}
                 onChangeText={handleSearch}
