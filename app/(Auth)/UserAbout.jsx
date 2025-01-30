@@ -6,6 +6,7 @@ import Svg from 'react-native-svg';
 import { Picker } from '@react-native-picker/picker';
 import SelectInstitute from './SelectInstitute';
 import ProfessionSection from './ProfessionSection';
+import ProfilePictureUpload from './ProfilePictureUpload';
 
 
 const UserAbout = () => {
@@ -292,9 +293,11 @@ const UserAbout = () => {
                 );
             case 6: // Profile Picture Upload
                 return (
-                    <View>
 
-                    </View>
+                    <ProfilePictureUpload />
+
+
+
                 );
             default:
                 return null;
