@@ -68,8 +68,8 @@ export default function index() {
                             <Text style={tw`text-white font-bold text-lg`}>Create Account</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-                    <Link href='/App'> Go to Profile</Link>
-                    <TouchableOpacity onPress={() => router.push('App')}>
+                    <Link href='/(tabs)'> Go to Profile</Link>
+                    <TouchableOpacity onPress={() => router.push('(tabs)')}>
                         <LinearGradient
                             colors={['#ebe2e1', '#ADD8FF']}
                             style={tw`rounded-full px-35 py-4 relative top-35 bottom--14`} // Adjust padding for button

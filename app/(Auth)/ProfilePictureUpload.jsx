@@ -50,16 +50,16 @@ const ProfilePictureUpload = () => {
     const isFinishEnabled = uploadedCount >= 3; // Enable button if at least 3 images uploaded
 
     return (
-        <View style={tw`flex bg-white p-5`}>
+        <View style={tw` bg-white `}>
             <Text style={tw`text-xl font-bold text-center mb-5`}>Upload Your Profile Pictures</Text>
 
             {/* Image Grid */}
             <View style={tw`flex-row flex-wrap justify-center`}>
                 {images.map((image, index) => (
-                    <View key={index} style={tw`w-1/3 p-2`}>
+                    <View key={index} style={tw`w-1/3  p-1`}>
                         {image ? (
                             <View style={tw`relative`}>
-                                <Image source={{ uri: image }} style={tw`w-full h-24 rounded-lg`} />
+                                <Image source={{ uri: image }} style={tw`w-full h-38 rounded-lg`} />
                                 <TouchableOpacity
                                     style={tw`absolute -top-2 -right-2 bg-red-500 w-6 h-6 rounded-full flex items-center justify-center`}
                                     onPress={() => removeImage(index)}
@@ -69,7 +69,7 @@ const ProfilePictureUpload = () => {
                             </View>
                         ) : (
                             <TouchableOpacity
-                                style={tw`w-full h-24 bg-gray-200 border border-gray-400 rounded-lg flex items-center justify-center`}
+                                style={tw`w-full h-38 bg-gray-200 border border-gray-400 rounded-lg flex items-center justify-center`}
                                 onPress={() => pickImageAndCrop(index)}
                             >
                                 <Text style={tw`text-gray-600 text-3xl`}>+</Text>

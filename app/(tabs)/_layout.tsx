@@ -1,59 +1,49 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
-import Colors from '@/constants/Colors';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Tabs } from 'expo-router';
 import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import tw from 'twrnc';
+import { View, StatusBar, SafeAreaView } from 'react-native';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+// Helper function for setting tab icons
+function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
+  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+
+      <Tabs
+        screenOptions={({ route }) => ({
+          tabBarStyle: tw`bg-white border-t border-gray-200`, // Bottom tab bar styling
+          tabBarActiveTintColor: 'blue',
+          tabBarInactiveTintColor: 'gray',
+          headerShown: false, // Hides the top header
+
+          tabBarIcon: ({ color, size }) => {
+            let iconName: string;
+
+            if (route.name === 'index') iconName = 'compass'; // FontAwesome Icon
+            else if (route.name === 'Nearby') iconName = 'location-arrow';
+            else if (route.name === 'hub') iconName = 'th-large';
+            else if (route.name === 'Messages') iconName = 'comments';
+            else if (route.name === 'profile') iconName = 'user';
+
+            return <FontAwesome name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        {/* Define your tab screens here */}
+        <Tabs.Screen name="index" options={{ tabBarLabel: 'Explore' }} />
+        <Tabs.Screen name="Nearby" options={{ tabBarLabel: 'Nearby' }} />
+        <Tabs.Screen name="hub" options={{ tabBarLabel: 'Hub' }} />
+        <Tabs.Screen name="Messages" options={{ tabBarLabel: 'Messages' }} />
+        <Tabs.Screen name="profile" options={{ tabBarLabel: 'Profile' }} />
+      </Tabs>
+
+    </>
   );
 }
