@@ -14,13 +14,13 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 export default function TabLayout() {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+      <StatusBar barStyle="dark-content" backgroundColor="white" translucent />
 
       <Tabs
         screenOptions={({ route }) => ({
           tabBarStyle: tw`bg-white border-t border-gray-200`, // Bottom tab bar styling
-          tabBarActiveTintColor: 'blue',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: '#6f9ec9', // Active tab color
+          tabBarInactiveTintColor: '#ababb0',
           headerShown: false, // Hides the top header
 
           tabBarIcon: ({ color, size }) => {
@@ -29,8 +29,10 @@ export default function TabLayout() {
             if (route.name === 'index') iconName = 'compass'; // FontAwesome Icon
             else if (route.name === 'Nearby') iconName = 'location-arrow';
             else if (route.name === 'hub') iconName = 'th-large';
+            else if (route.name === 'like') iconName = 'heart';
             else if (route.name === 'Messages') iconName = 'comments';
             else if (route.name === 'profile') iconName = 'user';
+
 
             return <FontAwesome name={iconName} size={size} color={color} />;
           },
@@ -40,6 +42,7 @@ export default function TabLayout() {
         <Tabs.Screen name="index" options={{ tabBarLabel: 'Explore' }} />
         <Tabs.Screen name="Nearby" options={{ tabBarLabel: 'Nearby' }} />
         <Tabs.Screen name="hub" options={{ tabBarLabel: 'Hub' }} />
+        <Tabs.Screen name="like" options={{ tabBarLabel: 'Like' }} />
         <Tabs.Screen name="Messages" options={{ tabBarLabel: 'Messages' }} />
         <Tabs.Screen name="profile" options={{ tabBarLabel: 'Profile' }} />
       </Tabs>
